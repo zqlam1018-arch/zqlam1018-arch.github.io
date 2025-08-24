@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>探索日本 • Introduction to Japan</title>
+  <meta name="description" content="中英对照：关于日本的地理、历史、文化、景点与美食（单页切换 + 轮播）。" />
+  <style>
+    :root{
+      --bg:#f6f8fb; --card:#ffffff; --accent:#c62828; --muted:#5b6670; --glass: rgba(255,255,255,0.7);
+      --radius:12px; --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, "Noto Sans SC", "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg,#f8fafc 0%,var(--bg) 100%);
+      color:#172031;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.55;
+      padding-bottom:40px;
+    }
+
+    /* Header */
+    header{
+      background: linear-gradient(90deg, rgba(198,40,40,0.95), rgba(218,81,76,0.9));
+      color:white;
+      padding:20px 16px;
+      box-shadow:0 6px 18px rgba(16,24,40,0.06);
+    }
+    .container{max-width:var(--maxw);margin:0 auto;padding:18px;}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{
+      width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,#fff,rgba(255,255,255,0.1));box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    }
+    .logo img{width:42px;height:42px;object-fit:cover;border-radius:8px}
+    h1{margin:0;font-size:1.25rem}
+    p.lead{margin:6px 0 0;color:rgba(255,255,255,0.9);font-size:0.95rem}
+
+    /* Nav */
+    nav{
+      display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0;
+    }
+    .tab{
+      background:var(--card);border-radius:999px;padding:8px 12px;border:1px solid rgba(16,24,40,0.06);
+      cursor:pointer;font-weight:600;color:var(--muted);
+      transition:all .18s ease;
+    }
+    .tab[aria-pressed="true"]{
+      background:linear-gradient(90deg,#fff,rgba(255,255,255,0.95));
+      color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 18px rgba(16,24,40,0.08);
+    }
+
+    /* Layout */
+    main{max-width:var(--maxw);margin:20px auto;padding:0 16px;display:grid;grid-template-columns:1fr 320px;gap:20px}
+    @media(max-width:980px){main{grid-template-columns:1fr} .sidebar{order:-1}}
+
+    /* Card / Section */
+    .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 10px 30px rgba(12,18,30,0.04)}
+    .section-title{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+    .section-title h2{margin:0;color:var(--accent);font-size:1.05rem}
+    .muted{color:var(--muted);font-size:0.95rem}
+
+    /* bilingual blocks */
+    .text-block{margin-top:12px}
+    .text-block p{margin:8px 0}
+    .en{color:#3b4850;font-style:italic;font-size:0.98rem}
+
+    /* carousel */
+    .carousel{position:relative;border-radius:10px;overflow:hidden;min-height:220px;background:#111}
+    .slides{display:flex;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
+    .slide{min-width:100%;user-select:none}
+    .slide img{width:100%;height:320px;object-fit:cover;display:block}
+    .carousel-controls{display:flex;justify-content:center;gap:8px;padding:10px}
+    .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.6);cursor:pointer;opacity:.9}
+    .dot.active{background:var(--accent);transform:scale(1.15)}
+    .carousel-caption{position:absolute;left:16px;bottom:14px;background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(0,0,0,0.05));color:white;padding:8px 12px;border-radius:8px;font-size:0.95rem}
+
+    /* sidebar */
+    .sidebar .card{position:sticky;top:20px}
+    .fact{display:flex;justify-content:space-between;padding:10px;border-radius:8px;background:linear-gradient(180deg,rgba(0,0,0,0.02),transparent);margin-bottom:8px}
+
+    footer{text-align:center;color:var(--muted);margin-top:18px;font-size:0.92rem}
+
+    /* small screens */
+    @media(max-width:520px){
+      .slide img{height:220px}
+      .logo{width:48px;height:48px}
+    }
+
+    /* accessibility focus */
+    .tab:focus{outline:3px solid rgba(198,40,40,0.18)}
+    .dot:focus{outline:2px solid rgba(198,40,40,0.18)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg" alt="日本国旗">
+        </div>
+        <div>
+          <h1>探索日本 • Introduction to Japan</h1>
+          <p class="lead">中英对照：地理 · 历史 · 文化 · 景点 · 美食（点击上方主题切换）</p>
+        </div>
+      </div>
+
+      <nav aria-label="主题导航" style="margin-top:14px">
+        <button class="tab" role="tab" aria-pressed="true" data-target="geo">地理 Geography</button>
+        <button class="tab" role="tab" aria-pressed="false" data-target="history">历史 History</button>
+        <button class="tab" role="tab" aria-pressed="false" data-target="culture">文化 Culture</button>
+        <button class="tab" role="tab" aria-pressed="false" data-target="attractions">景点 Attractions</button>
+        <button class="tab" role="tab" aria-pressed="false" data-target="food">美食 Cuisine</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- content column -->
+    <div>
+      <!-- Geography -->
+      <article id="geo" class="card section" data-section>
+        <div class="section-title"><h2>地理 • Geography</h2><div class="muted">位置 · 地形 · 气候 · 自然灾害</div></div>
+        <div class="text-block">
+          <p><strong>中文（详述）</strong></p>
+          <p>日本位于东亚太平洋西缘，由四个主要岛屿（北海道、本州、四国、九州）与数千个小岛组成。国土多山，约70%为丘陵与山地，平地主要集中在沿海与河口冲积平原。日本拥有丰富的海岸线、众多火山与温泉资源。其地理位置使得岛内气候从北到南呈现明显差异：北海道属寒温带，适合滑雪与耐寒农作；本州中部与东南沿海属温带，四季分明；冲绳群岛属亚热带，冬暖夏热。</p>
+          <p class="en"><strong>English (detailed)</strong></p>
+          <p class="en">Japan lies off the eastern coast of Asia, surrounded by the Pacific Ocean. It consists of four main islands—Hokkaido, Honshu, Shikoku, and Kyushu—and thousands of smaller islands. Approximately 70% of the country is mountainous, with flatlands concentrated along coasts and river deltas. Japan's volcanic activity created abundant hot springs (onsen). Climatically, it ranges from the cool temperate zones in Hokkaido to the subtropical climate of Okinawa, producing four distinct seasons across the archipelago.</p>
+
+        </div>
+
+        <div class="text-block" style="margin-top:12px">
+          <p><strong>地理数据（概览）</strong></p>
+          <ul>
+            <li>国土面积：约 38 万平方公里（含海域与群岛）。</li>
+            <li>主要岛屿：北海道、本州（最大）、四国、九州。</li>
+            <li>典型地貌：山脉、火山、河谷、沿海平原。</li>
+            <li>地理风险：频繁的地震、海啸与火山喷发（位于太平洋火环）。</li>
+          </ul>
+          <p class="en"><strong>Key geographic facts</strong></p>
+          <p class="en">Area: around 380,000 km² (including islands). Main islands: Hokkaido, Honshu (largest), Shikoku, Kyushu. Typical landforms: mountains, volcanoes, river valleys, and coastal plains. Japan sits on the Pacific Ring of Fire, making earthquakes, tsunamis, and volcanic eruptions significant natural hazards.</p>
+        </div>
+      </article>
+
+      <!-- History -->
+      <article id="history" class="card section" data-section style="display:none">
+        <div class="section-title"><h2>历史 • History</h2><div class="muted">从古代到现代的关键阶段</div></div>
+        <div class="text-block">
+          <p><strong>中文（简要时间线）</strong></p>
+          <ol>
+            <li><strong>绳文与弥生时期</strong>（约公元前1万年—公元3世纪）：绳文文化以狩猎、采集和独特陶器闻名，弥生时代出现稻作与农业文明的萌芽。</li>
+            <li><strong>古代—奈良/平安</strong>（8—12世纪）：中央集权与贵族文化发展，佛教、律令制度与汉字文化令艺术和文学繁荣。</li>
+            <li><strong>武士与幕府时代</strong>（12—19世纪）：镰仓、室町、江户（德川）等幕府统治下形成武士阶层与幕藩体制；江户时期保持相对稳定并发展都市文化。</li>
+            <li><strong>明治维新</strong>（1868 年）：推翻幕府，开始现代化与西化，引入工业化、教育与宪政改革。</li>
+            <li><strong>20世纪</strong>：日本快速现代化并成为世界工业强国，二战后投向和平与民主，重建经济并成为科技与制造业领先国家。</li>
+          </ol>
+          <p class="en"><strong>English (timeline highlights)</strong></p>
+          <ol class="en">
+            <li><strong>Jōmon & Yayoi periods</strong> (c.10,000 BCE–3rd century CE): Jōmon is known for pottery and hunter-gatherer culture; Yayoi introduced wet-rice agriculture.</li>
+            <li><strong>Ancient—Nara & Heian</strong> (8th–12th centuries): Centralized court culture, Buddhism, writing, and classical arts flourished.</li>
+            <li><strong>Samurai & Shogunates</strong> (12th–19th centuries): Feudal eras under Kamakura, Muromachi, and Tokugawa shogunates produced samurai culture and long periods of stability in Edo (Tokyo).</li>
+            <li><strong>Meiji Restoration</strong> (1868): Overthrew the shogunate, launched rapid modernization and industrialization.</li>
+            <li><strong>20th century</strong>: Rapid industrialization, wartime period, followed by postwar reconstruction and economic miracle, leading to Japan's role as a major technological and manufacturing power.</li>
+          </ol>
+        </div>
+
+        <div class="text-block" style="margin-top:12px">
+          <p><strong>历史影响（要点）</strong></p>
+          <ul>
+            <li>政治：从天皇制度与封建武士到近代宪政与议会制的转变。</li>
+            <li>社会：城镇化、教育普及与现代化生活方式的形成。</li>
+            <li>文化：传统艺术与现代流行文化并存，影响全球。</li>
+          </ul>
+          <p class="en"><strong>Historical impacts</strong></p>
+          <p class="en">Political changes: transformation from imperial and feudal systems to modern constitutional governance. Social changes: urbanization and mass education. Cultural legacy: coexistence of traditional arts with globalized popular culture.</p>
+        </div>
+      </article>
+
+      <!-- Culture -->
+      <article id="culture" class="card section" data-section style="display:none">
+        <div class="section-title"><h2>文化 • Culture</h2><div class="muted">传统 · 节日 · 当代文化</div></div>
+        <div class="text-block">
+          <p><strong>中文（核心要点）</strong></p>
+          <p>日本文化具有强烈的季节性与礼仪感：茶道（体现静、敬、清、寂）、花道（插花美学）、和服（服饰礼仪）、和食（强调季节与摆盘）。各地节庆（matsuri）展示地域传统，如京都祇园祭、青森睡魔祭、札幌雪祭等。二十世纪以来，日本又以漫画（manga）、动画（anime）、电子游戏与流行音乐（J-pop）在世界文化中占据重要位置。</p>
+          <p class="en"><strong>English (core points)</strong></p>
+          <p class="en">Japanese culture emphasizes seasonality and etiquette: tea ceremony (calmness and respect), ikebana (flower arrangement aesthetics), kimono (traditional dress), and washoku (seasonal cuisine). Local festivals (matsuri) showcase regional traditions—Gion Matsuri in Kyoto, Nebuta Festival in Aomori, and the Sapporo Snow Festival. In the 20th century, manga, anime, video games, and J-pop expanded Japan's global cultural influence.</p>
+        </div>
+
+        <div class="text-block" style="margin-top:12px">
+          <p><strong>礼仪与日常</strong></p>
+          <ul>
+            <li>礼貌与秩序：排队、低声交谈、在公共场所避免喧哗。</li>
+            <li>敬语与称呼：日常交流中常用敬语表达尊重。</li>
+            <li>季节与生活：赏樱（hanami）、赏月（tsukimi）等以自然为中心的活动。</li>
+          </ul>
+          <p class="en"><strong>Etiquette & daily life</strong></p>
+          <p class="en">Politeness and order: queuing, low-volume conversation in public. Use of honorific language expresses respect. Seasonal events like hanami (cherry blossom viewing) and tsukimi (moon viewing) center daily life around nature.</p>
+        </div>
+      </article>
+
+      <!-- Attractions -->
+      <article id="attractions" class="card section" data-section style="display:none">
+        <div class="section-title"><h2>景点 • Attractions</h2><div class="muted">5 个精选代表景点（轮播）</div></div>
+        <div class="text-block">
+          <p><strong>中文简介（每个一句）</strong></p>
+          <ul>
+            <li><strong>富士山（Mount Fuji）</strong>：日本最高峰与象征，观日出（御来光）与登山季节吸引大量游客。</li>
+            <li><strong>京都（Kyoto）</strong>：古都寺庙众多，传统建筑与庭园保存完整，是体验日本传统文化的最佳地点。</li>
+            <li><strong>广岛和平纪念公园（Hiroshima Peace Park）</strong>：纪念二战原子弹受害者，强调和平与历史教育。</li>
+            <li><strong>小樽运河（Otaru Canal）— 北海道</strong>：保存良好的运河与仓库街区，冬季灯光与雪景浪漫迷人。</li>
+            <li><strong>冲绳海滩（Okinawa Beaches）</strong>：透明海水和珊瑚礁，呈现与本州截然不同的亚热带风情。</li>
+          </ul>
+
+          <p class="en"><strong>English summaries (one line each)</strong></p>
+          <ul class="en">
+            <li><strong>Mount Fuji</strong>: Japan’s highest peak and national symbol, popular for sunrise views and climbing during the season.</li>
+            <li><strong>Kyoto</strong>: A historic capital with temples, shrines, and gardens—ideal for traditional culture immersion.</li>
+            <li><strong>Hiroshima Peace Park</strong>: A memorial site for the atomic bombing victims, promoting peace and remembrance.</li>
+            <li><strong>Otaru Canal, Hokkaido</strong>: A preserved canal district with historic warehouses; enchanting during winter illumination.</li>
+            <li><strong>Okinawa Beaches</strong>: Subtropical beaches, coral reefs, and island culture—distinct from mainland Japan.</li>
+          </ul>
+        </div>
+
+        <!-- Carousel -->
+        <div class="carousel" aria-roledescription="carousel" aria-label="景点轮播">
+          <div class="slides" id="slides">
+            <figure class="slide" data-title="富士山 Mount Fuji">
+              <img src="富士山.jpg" alt="Mount Fuji">
+            </figure>
+
+            <figure class="slide" data-title="京都 Kyoto">
+              <img src="京都.webp" alt="Kiyomizu-dera, Kyoto">
+            </figure>
+
+            <figure class="slide" data-title="广岛 Hiroshima">
+              <img src="广岛.webp" alt="Hiroshima Peace Memorial Park">
+            </figure>
+
+            <figure class="slide" data-title="小樽 Otaru">
+              <img src="小樽.webp" alt="Otaru Canal, Hokkaido">
+            </figure>
+
+            <figure class="slide" data-title="冲绳 Okinawa">
+              <img src="冲绳.avif" alt="Okinawa Beach">
+            </figure>
+          </div>
+
+          <div class="carousel-caption" id="carousel-caption">富士山 Mount Fuji</div>
+        </div>
+
+        <div class="carousel-controls" role="tablist" aria-label="轮播点">
+          <button class="dot" aria-label="slide 1" data-index="0" tabindex="0"></button>
+          <button class="dot" aria-label="slide 2" data-index="1" tabindex="0"></button>
+          <button class="dot" aria-label="slide 3" data-index="2" tabindex="0"></button>
+          <button class="dot" aria-label="slide 4" data-index="3" tabindex="0"></button>
+          <button class="dot" aria-label="slide 5" data-index="4" tabindex="0"></button>
+        </div>
+
+      </article>
+
+      <!-- Food -->
+      <article id="food" class="card section" data-section style="display:none">
+        <div class="section-title"><h2>美食 • Cuisine</h2><div class="muted">代表料理 · 地方特色 · 饮食文化</div></div>
+        <div class="text-block">
+          <p><strong>中文（代表与要点）</strong></p>
+          <ul>
+            <li><strong>寿司 / 刺身</strong>：以新鲜海产为主，讲究生鱼片的切法与米饭（醋饭）的调味。</li>
+            <li><strong>拉面</strong>：汤底多样（酱油、味噌、盐、豚骨），各地风味差异明显。</li>
+            <li><strong>天妇罗</strong>：海鲜或蔬菜薄衣油炸，外酥里嫩，常搭配蘸酱或盐。</li>
+            <li><strong>和牛 / 烧肉</strong>：优质牛肉以大理石花纹著称，口感嫩而多汁。</li>
+            <li><strong>地方小吃</strong>：大阪章鱼烧、广岛御好烧、北海道海鲜等。</li>
+          </ul>
+          <p class="en"><strong>English (highlights & culture)</strong></p>
+          <p class="en">Japanese cuisine highlights freshness, seasonality, and presentation. Sushi and sashimi emphasize high-quality seafood and vinegared rice. Ramen features regional broths (shoyu, miso, shio, tonkotsu). Tempura is lightly battered and deep-fried seafood or vegetables. Wagyu beef is prized for its marbled texture. Regional specialties—takoyaki in Osaka, okonomiyaki in Hiroshima, and seafood in Hokkaido—reflect local ingredients and tastes.</p>
+        </div>
+
+        <div class="text-block" style="margin-top:12px">
+          <p><strong>饮食文化小贴士</strong></p>
+          <ul>
+            <li>用餐礼仪：吃拉面时发出吸面声被视为对厨师的赞美（非必需），用筷子有礼仪禁忌（如不可直插于饭中）。</li>
+            <li>便利性：便利店（convenience stores）食品丰富且品质可靠，是旅行中的好选择。</li>
+          </ul>
+          <p class="en"><strong>Tips</strong></p>
+          <p class="en">Dining etiquette: slurping ramen is common and indicates enjoyment; avoid sticking chopsticks vertically into rice. Convenience stores (konbini) are surprisingly handy for quality meals while traveling.</p>
+        </div>
+
+      </article>
+    </div>
+
+    <!-- sidebar -->
+    <aside class="sidebar">
+      <div class="card">
+        <h3 style="margin:0 0 8px">快速事实 • Quick Facts</h3>
+        <div class="fact"><strong>首都</strong><span>东京 Tokyo</span></div>
+        <div class="fact"><strong>语言</strong><span>日语 Japanese</span></div>
+        <div class="fact"><strong>地形</strong><span>多山 · 火山 · 温泉</span></div>
+        <div class="fact"><strong>气候</strong><span>四季分明</span></div>
+        <div style="margin-top:8px;color:var(--muted);font-size:0.95rem">图片来源示例：维基共享资源（可按需替换为高分辨率图片）</div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <h4 style="margin:0 0 8px">交互说明 • How to use</h4>
+        <ol class="muted" style="margin:0;padding-left:16px">
+          <li>点击上方主题按钮切换章节（仅显示对应内容）。</li>
+          <li>在景点页可观看轮播；点击下方圆点可手动切换图片。</li>
+          <li>页面为示例教学用途，图片与数据可按需替换。</li>
+        </ol>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="container">
+    <div class="muted">© 2025 学习演示 • 本页由 ChatGPT 生成（示例用）</div>
+  </footer>
+
+  <script>
+    // --- Section switching ---
+    (function(){
+      const tabs = document.querySelectorAll('.tab');
+      const sections = document.querySelectorAll('[data-section]');
+      function setActive(targetId){
+        // hide all sections
+        sections.forEach(s => s.style.display = 'none');
+        // show target
+        const el = document.getElementById(targetId);
+        if(el) el.style.display = '';
+        // update tab aria-pressed
+        tabs.forEach(t => t.setAttribute('aria-pressed', t.dataset.target === targetId ? 'true' : 'false'));
+      }
+      // add click handlers
+      tabs.forEach(t => t.addEventListener('click', ()=> setActive(t.dataset.target)));
+      // keyboard support: Enter / Space
+      tabs.forEach(t => {
+        t.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); t.click(); }
+        });
+      });
+      // default: show geo
+      setActive('geo');
+    })();
+
+    // --- Carousel (attractions) ---
+    (function(){
+      const slidesWrapper = document.getElementById('slides');
+      const slides = slidesWrapper ? slidesWrapper.querySelectorAll('.slide') : [];
+      const dots = document.querySelectorAll('.dot');
+      const caption = document.getElementById('carousel-caption');
+      let index = 0;
+      let timer = null;
+
+      function showSlide(i){
+        if(!slides.length) return;
+        index = (i + slides.length) % slides.length;
+        // transform
+        slidesWrapper.style.transform = 'translateX(' + (-index * 100) + '%)';
+        // caption from data-title
+        const title = slides[index].dataset.title || '';
+        if(caption) caption.textContent = title;
+        // dots active
+        dots.forEach(d => d.classList.toggle('active', Number(d.dataset.index) === index));
+      }
+
+      // init: set widths for slides wrapper (flex children already 100%)
+      // wire dots
+      dots.forEach(d => {
+        d.addEventListener('click', ()=> { showSlide(Number(d.dataset.index)); resetTimer(); });
+        d.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ') { e.preventDefault(); d.click(); } });
+      });
+
+      function next(){
+        showSlide(index + 1);
+      }
+      function resetTimer(){
+        if(timer) clearInterval(timer);
+        timer = setInterval(next, 3500);
+      }
+
+      // initial
+      showSlide(0);
+      resetTimer();
+
+      // allow swipe left/right on touch
+      (function enableSwipe(){
+        if(!slidesWrapper) return;
+        let startX = null;
+        slidesWrapper.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+        slidesWrapper.addEventListener('touchend', e => {
+          if(startX === null) return;
+          const endX = e.changedTouches[0].clientX;
+          const dx = endX - startX;
+          if(Math.abs(dx) > 40){ // threshold
+            if(dx < 0) showSlide(index + 1); else showSlide(index - 1);
+            resetTimer();
+          }
+          startX = null;
+        });
+      })();
+
+      // when window resizes, ensure transform remains correct
+      window.addEventListener('resize', ()=> showSlide(index));
+    })();
+  </script>
+</body>
+</html>
